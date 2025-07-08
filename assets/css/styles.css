@@ -1,0 +1,546 @@
+/* 2025 Gabe Mods (https://gabemods.github.io/about), All Rights Reserved. 
+*/
+
+:root {
+
+    --solid-bg: #fff;
+    --background-color-light: #f4f4f4;
+    --text-color-light: #333;
+    --card-container-background-color-light: #fff; 
+    --header-bg-light: rgba(250, 250, 250, 0.2);
+    --header-bg-dark: rgba(18, 18, 18, 0.3);
+    --link-color-light: #007bff;
+    --button-background-light: #007bff;
+    --button-text-light: #fff;
+    --footer-text-light: #666;
+    --md-icon-font: Material Symbols Rounded;
+    --md-sys-typescale-body-font: "OneUISans", sans-serif;
+    --md-sys-typescale-title-font: "OneUISans", sans-serif;
+    --md-sys-typescale-label-font: "OneUISans", sans-serif;
+    --md-sys-typescale-headline-font: "OneUISans", sans-serif;
+    --header-initial-height: 70px;
+    --header-scrolled-height: 65px;
+
+    --background-color-dark: #1a1a1a;
+    --text-color-dark: #e0e0e0;
+    --card-container-background-color-dark: #2c2c2c; 
+    --header-background-dark: #333;
+    --link-color-dark: #8ab4f8; 
+    --button-background-dark: #8ab4f8;
+    --button-text-dark: #1a1a1a;
+    --footer-text-dark: #aaa;
+    --transition: 0.25s ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+body.font-system {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+@font-face {
+    font-family: "OneUISans";
+    src: url("../fonts/OneUISans-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    font-family: 'OneUISans', sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+}
+
+body.font-OneUISans {
+    font-family: 'OneUISans', sans-serif;
+}
+
+body.font-system-apple {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+body.font-Roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+body.font-Open-Sans {
+    font-family: 'Open Sans', sans-serif;
+}
+
+body.dark {
+    background-color: var(--background-color-dark);
+    color: var(--text-color-dark);
+}
+
+body.dark header {
+    background-color: var(--header-background-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+body.dark .card-container { 
+    background-color: var(--card-container-background-color-dark); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+body.dark .card-container:hover { 
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+body.dark .card-container a { 
+    color: var(--text-color-dark);
+}
+
+body.dark .developer-name { 
+    color: var(--link-color-dark);
+}
+
+body.dark .telegram-button {
+    background-color: var(--button-background-dark);
+    color: var(--button-text-dark);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark .telegram-button:hover {
+    background-color: #6a9ee8; 
+}
+
+body.dark footer {
+    color: var(--footer-text-dark);
+}
+
+.main-header {
+    font-family: inherit;
+    font-weight: 500;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px 24px;
+    z-index: 200;
+    will-change: padding, background-color, backdrop-filter, box-shadow;
+    transition: padding 0.25s ease, backdrop-filter 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease, height 0.25s ease;
+    background: var(--header-bg-light);
+    backdrop-filter: blur(15px);
+    height: var(--header-initial-height);
+    display: flex;
+    align-items: center;
+}
+
+body.dark .main-header {
+    background: var(--header-bg-dark);
+}
+
+.main-header.scrolled {
+    padding: 8px 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(20px);
+    height: var(--header-scrolled-height);
+}
+
+.main-header.translucent.scrolled {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+body.dark .main-header.translucent.scrolled {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.main-header.no-translucency {
+    background-color: var(--solid-bg);
+    backdrop-filter: none;
+}
+
+body.dark .main-header.no-translucency {
+    background-color: #121212 !important;
+}
+
+.main-header.shrink {
+    padding: 6px 16px;
+    height: var(--header-scrolled-height);
+}
+
+.header-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.header-title {
+    max-width: 100px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.title-container {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.title-container.hidden {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+    position: absolute;
+}
+
+.main-header h1 {
+    font-size: 1.3rem;
+    font-weight: 550;
+    margin: 0;
+    transition: font-size var(--transition);
+    will-change: font-size, transform;
+}
+
+.main-header.shrink h1 {
+    font-size: 1.2rem;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+md-icon-button {
+    --md-sys-color-on-surface: var(--text-color-light); 
+    --md-sys-color-on-surface-variant: var(--text-color-light); 
+}
+
+body.dark md-icon-button {
+    --md-sys-color-on-surface: var(--text-color-dark); 
+    --md-sys-color-on-surface-variant: var(--text-color-dark);
+}
+
+.content-header {
+    width: 80%; 
+    max-width: 1200px;
+    margin: 90px auto 10px auto; 
+    padding: 0 15px; 
+    text-align: left;
+}
+
+.content-header .title-wrapper {
+    margin-bottom: 2px; 
+}
+
+.content-header .content-title {
+    font-size: 1.5em; 
+    margin: 0; 
+    color: var(--text-color-light);
+}
+
+.content-header .subtitle-wrapper {
+
+}
+
+.content-header .content-subtitle {
+    font-size: 1em; 
+    color: var(--footer-text-light); 
+    margin: 0; 
+}
+
+body.dark .content-header .content-title {
+    color: var(--text-color-dark);
+}
+
+body.dark .content-header .content-subtitle {
+    color: var(--footer-text-dark);
+}
+
+.cards-container {
+    display: flex;
+    flex-direction: column;
+    width: 80%; 
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 0 0 2rem 0; 
+}
+
+.card-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 15px;
+    width: 100%;
+    background-color: var(--card-container-background-color-light);
+    border-radius: 20px;
+    gap: 20px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: var(--transition);
+}
+
+.card-container:active {
+    transform: scale(1.03);
+}
+
+.card-container a {
+    text-decoration: none;
+    color: var(--text-color-light);
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: inherit;
+}
+
+.card-container img {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    flex-grow: 1;
+}
+
+.card-container .developer-name {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: var(--link-color-light);
+    margin: 0;
+}
+
+.card-container p {
+    font-size: 0.9em;
+    margin: 0;
+    color: inherit;
+}
+
+.telegram-button-container {
+    text-align: center;
+    padding: 2rem 5%;
+}
+
+.telegram-button {
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    background-color: var(--button-background-light);
+    color: var(--button-text-light);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 8px; 
+}
+
+.telegram-button:hover {
+    background-color: #0056b3; 
+    transform: translateY(-2px);
+}
+
+.telegram-icon {
+    width: 28px; 
+    height: 28px;
+    vertical-align: middle; 
+}
+
+footer {
+    text-align: center;
+    padding: 1.5rem 5%;
+    margin-top: 2rem;
+    font-size: 0.9em;
+    color: var(--footer-text-light);
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: transparent;
+    padding: 10px 0;
+    transition: color var(--transition);
+}
+
+body.dark footer {
+  color: var(--text-color-dark); 
+}
+
+@media (max-width: 768px) {
+    .content-header {
+        width: 90%;
+        padding: 0 10px;
+        margin-top: 80px;
+    }
+
+    .cards-container {
+        width: 90%;
+        padding: 0 0 1.5rem 0;
+    }
+
+    .content-header .content-title {
+        font-size: 1.3em; 
+    }
+
+    .content-header .content-subtitle {
+        font-size: 0.95em; 
+    }
+
+    header {
+        padding: 0.8rem 4%;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .card-container {
+        padding: 12px;
+        gap: 15px;
+    }
+
+    .card-container img {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+    }
+
+    .card-container .developer-name {
+        font-size: 1.1em;
+    }
+
+    .card-container p {
+        font-size: 0.85em;
+    }
+
+    .telegram-button {
+        width: 90%;
+        box-sizing: border-box; 
+    }
+}
+
+@media (max-width: 480px) {
+    .content-header {
+        width: 95%;
+        padding: 0 8px;
+        margin-top: 75px;
+    }
+
+    .cards-container {
+        width: 95%;
+        padding: 0 0 1rem 0;
+    }
+
+    .content-header .content-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .content-header .content-subtitle {
+        font-size: 0.9em; 
+    }
+
+    .card-container {
+        padding: 10px;
+        gap: 10px;
+        border-radius: 15px;
+    }
+
+    .card-container img {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+    }
+
+    .card-container .developer-name {
+        font-size: 1em;
+    }
+
+    .card-container p {
+        font-size: 0.8em;
+    }
+}
+
+#content-fade-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--fade-overlay-color, rgba(255, 255, 255, 1));
+  z-index: 100000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 250ms ease-in-out, visibility 250ms ease-in-out;
+  pointer-events: none;
+}
+
+body.dark {
+  --fade-overlay-color: rgba(0, 0, 0, 1);
+}
+
+#content-fade-overlay.fade-active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.custom-divider {
+  border: 0;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  width: 100%;
+}
+
+body.dark .custom-divider {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: transparent;
+  margin-top: 40px;
+  padding: 10px 0;
+  text-align: center;
+  font-size: clamp(0.85rem, 1vw + 0.3rem, 0.95rem);
+  transition: color var(--transition);
+}
+
+footer .container {
+  width: min(90%, 800px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
