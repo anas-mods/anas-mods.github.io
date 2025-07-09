@@ -544,121 +544,142 @@ footer a:hover {
   text-decoration: underline;
 }
 
+/* --- GLOBAL DIALOG DISPLAY & ANIMATION --- */
+/* These styles are fundamental for any <dialog> element's initial state and animations.
+   They should apply to ALL dialogs (download, settings, etc.) for consistent behavior. */
 dialog:not([open]) {
-    display: none; 
+    display: none;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.9); 
+    transform: translate(-50%, -50%) scale(0.9);
 }
 
 dialog {
-    border: none; 
-    padding: 0; 
-    margin: auto; 
+    border: none; /* All dialogs have no border */
+    padding: 0; /* All dialogs have no padding */
+    margin: auto; /* All dialogs are centered */
 
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9); 
+    transform: translate(-50%, -50%) scale(0.9); /* Initial transform for animation */
 
-    border-radius: 20px; 
-    text-align: center;
-    z-index: 10000;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3); 
+    z-index: 10000; /* All dialogs are on top */
 
-    opacity: 0;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
-    pointer-events: none; 
+    opacity: 0; /* All dialogs start hidden for animation */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Animation for all dialogs */
+    pointer-events: none; /* Not clickable when hidden or animating */
 
-    display: flex;
+    display: flex; /* All dialogs are flex containers */
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.download-dialog {
-    width: 320px; 
-    backdrop-filter: blur(15px); 
-
-    background-color: rgba(255, 255, 255, 0.6); 
-    color: var(--text-color-light); 
-}
-
-body.dark dialog {
-    background-color: rgba(10, 10, 10, 0.7); 
-    color: var(--text-color-dark); 
-}
-
-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.4); 
-    backdrop-filter: none; 
-    opacity: 0; 
-    transition: opacity 0.3s ease-out; 
-}
-
 dialog.show {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1); 
-    pointer-events: all; 
-}
-
-dialog.show::backdrop {
-    opacity: 1; 
+    transform: translate(-50%, -50%) scale(1); /* Zooms in */
+    pointer-events: all; /* Make dialog clickable when shown */
 }
 
 dialog.hide {
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.85); 
-    pointer-events: none; 
+    transform: translate(-50%, -50%) scale(0.85); /* Shrinks slightly before closing */
+    pointer-events: none; /* Prevent clicks during hide animation */
 }
 
-dialog.hide::backdrop {
-    opacity: 0; 
+/* --- CUSTOM BACKDROP STYLING --- */
+/* This targets your <div id="backdrop"> element, which both dialogs will share.
+   It should NOT affect the native dialog::backdrop. */
+#backdrop { /* Assuming you have this custom backdrop in your HTML */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dim background */
+    backdrop-filter: blur(0); /* No blur on the backdrop itself */
+    z-index: 9999; /* Below dialogs, above content */
+    opacity: 0; /* Start hidden for animation */
+    pointer-events: none; /* Not clickable when hidden */
+    transition: opacity 0.3s ease-out; /* Fade animation for backdrop */
 }
 
-.modal-content { 
+#backdrop.show {
+    opacity: 1; /* Make backdrop visible when it has 'show' class */
+    pointer-events: all; /* Make backdrop clickable when visible */
+}
+
+/* Ensure the native dialog::backdrop is explicitly transparent/hidden
+   if you are using a custom #backdrop div. */
+dialog::backdrop {
+    background-color: transparent;
+    backdrop-filter: none;
+    opacity: 0;
+    pointer-events: none;
+    /* transition: none; - Add this if you want to ensure no transition */
+}
+
+.download-dialog {
+    width: 320px;
+    /* These properties are moved here to specifically target ONLY the download dialog */
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(15px);
+    background-color: rgba(255, 255, 255, 0.6);
+    color: var(--text-color-light);
+}
+
+/* Dark Mode for ONLY the download dialog */
+body.dark .download-dialog {
+    background-color: rgba(10, 10, 10, 0.7);
+    color: var(--text-color-dark);
+}
+
+.download-dialog .modal-content {
     display: flex;
     flex-direction: column;
-    align-items: center; 
+    align-items: center;
     justify-content: center;
-    gap: 12px; 
+    gap: 12px;
     width: 100%;
-    padding: 15px; 
-    box-sizing: border-box; 
+    padding: 15px;
+    box-sizing: border-box;
 }
 
 .download-dialog h2 {
-    font-size: 1.4em; 
+    font-size: 1.4em;
     margin-top: 0;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     color: inherit;
-    font-weight: bold; 
+    font-weight: bold;
 }
 
 .download-dialog p {
-    font-size: 0.9em; 
-    margin-bottom: 15px; 
+    font-size: 0.9em;
+    margin-bottom: 15px;
     color: inherit;
     opacity: 0.9;
 }
 
-.download-actions {
+.download-dialog .download-actions {
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     width: 100%;
-    gap: 12px; 
-    margin-bottom: 10px; 
+    gap: 12px;
+    margin-bottom: 10px;
 }
 
-.download-button.direct {
-    display: block; 
-    width: 100%; 
+.download-dialog .download-button.direct {
+    display: block;
+    width: 100%;
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
     border-radius: 8px;
     color: white;
-    background: linear-gradient(90deg, #007AFF, #0051CC); 
+    background: linear-gradient(90deg, #007AFF, #0051CC);
     text-decoration: none;
     transition: background 0.3s ease, transform 0.1s ease;
     box-shadow: none;
@@ -667,21 +688,21 @@ dialog.hide::backdrop {
     letter-spacing: normal;
 }
 
-.download-button.direct:hover {
-    background: linear-gradient(90deg, #006AE6, #0043B3); 
+.download-dialog .download-button.direct:hover {
+    background: linear-gradient(90deg, #006AE6, #0043B3);
     transform: none;
 }
 
-.download-button.telegram {
-    display: block; 
-    width: 100%; 
+.download-dialog .download-button.telegram {
+    display: block;
+    width: 100%;
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
     text-align: center;
-    border-radius: 8px; 
-    color: white; 
-    background: linear-gradient(90deg, #0088cc, #0077b3); 
+    border-radius: 8px;
+    color: white;
+    background: linear-gradient(90deg, #0088cc, #0077b3);
     text-decoration: none;
     transition: background 0.3s ease, transform 0.1s ease;
     box-shadow: none;
@@ -690,30 +711,29 @@ dialog.hide::backdrop {
     letter-spacing: normal;
 }
 
-.download-button.telegram:hover {
-    background: linear-gradient(90deg, #007AB3, #006699); 
+.download-dialog .download-button.telegram:hover {
+    background: linear-gradient(90deg, #007AB3, #006699);
     transform: none;
-    text-decoration: none; 
+    text-decoration: none;
 }
 
 .download-dialog .close-button {
     background: none;
     border: none;
-    color: #FF3B30; 
+    color: #FF3B30;
     font-size: 16px;
     font-weight: bold;
     padding: 8px;
     cursor: pointer;
-
-    align-self: flex-end; 
-    margin-top: 5px; 
+    align-self: flex-end;
+    margin-top: 5px;
     transition: text-decoration 0.2s ease, color 0.2s ease;
 }
 
 .download-dialog .close-button:hover {
     text-decoration: underline;
     background: none;
-    color: #CC0000; 
+    color: #CC0000;
 }
 
 .card-container {
