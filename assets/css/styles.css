@@ -22,7 +22,7 @@
 
     --background-color-dark: #1a1a1a;
     --text-color-dark: #e0e0e0;
-    --card-container-background-color-dark: #2c2c2c; 
+    --card-container-background-color-dark: #202121; 
     --header-background-dark: #333;
     --link-color-dark: #8ab4f8; 
     --button-background-dark: #8ab4f8;
@@ -85,7 +85,7 @@ body.dark header {
 
 body.dark .card-container { 
     background-color: var(--card-container-background-color-dark); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 body.dark .card-container:hover { 
@@ -284,7 +284,7 @@ body.dark .content-header .content-subtitle {
     background-color: var(--card-container-background-color-light);
     border-radius: 20px;
     gap: 20px;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.5);
     overflow: hidden;
     transition: var(--transition);
 }
