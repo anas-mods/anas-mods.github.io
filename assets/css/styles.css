@@ -138,16 +138,16 @@ body.dark .main-header {
 
 .main-header.scrolled {
     padding: 8px 24px;
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(35px);
     height: var(--header-scrolled-height);
 }
 
 .main-header.translucent.scrolled {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.0);
 }
 
 body.dark .main-header.translucent.scrolled {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .main-header.no-translucency {
@@ -558,12 +558,12 @@ dialog {
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9); /* Initial state for animation */
+    transform: translate(-50%, -50%) scale(0.9); 
 
     z-index: 10000;
 
     opacity: 0;
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* General dialog animation */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
     pointer-events: none;
 
     display: flex;
@@ -572,13 +572,13 @@ dialog {
     justify-content: center;
 }
 
-dialog.show { /* Used to show the dialog and trigger opening animation */
+dialog.show { 
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
     pointer-events: all;
 }
 
-dialog.hide { /* Used to hide the dialog and trigger closing animation */
+dialog.hide { 
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.85);
     pointer-events: none;
@@ -591,6 +591,7 @@ dialog.hide { /* Used to hide the dialog and trigger closing animation */
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(0);
     z-index: 9999;
     opacity: 0;
     pointer-events: none;
@@ -615,9 +616,6 @@ dialog::backdrop {
     pointer-events: none;
 }
 
-/* --- DOWNLOAD DIALOG SPECIFIC STYLES --- */
-/* These styles should *only* define visual appearance, not animation states. */
-/* The animation states are managed by the general 'dialog.show' and 'dialog.hide' classes. */
 .download-dialog {
     width: 320px;
     border-radius: 20px;
@@ -626,7 +624,7 @@ dialog::backdrop {
     backdrop-filter: blur(15px);
     background-color: rgba(255, 255, 255, 0.5);
     color: var(--text-color-light);
-    /* REMOVED: opacity, transform, transition from here */
+
 }
 
 body.dark .download-dialog {
@@ -735,5 +733,4 @@ body.dark .download-dialog {
 }
 
 .card-container {
-    cursor: pointer;
-}
+ }
