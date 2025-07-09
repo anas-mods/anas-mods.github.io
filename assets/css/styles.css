@@ -544,9 +544,6 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* --- GLOBAL DIALOG DISPLAY & ANIMATION --- */
-/* These styles are fundamental for any <dialog> element's initial state and animations.
-   They should apply to ALL dialogs (download, settings, etc.) for consistent behavior. */
 dialog:not([open]) {
     display: none;
     opacity: 0;
@@ -554,83 +551,85 @@ dialog:not([open]) {
 }
 
 dialog {
-    border: none; /* All dialogs have no border */
-    padding: 0; /* All dialogs have no padding */
-    margin: auto; /* All dialogs are centered */
+    border: none;
+    padding: 0;
+    margin: auto;
 
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0.9); /* Initial transform for animation */
+    transform: translate(-50%, -50%) scale(0.9); /* Initial state for animation */
 
-    z-index: 10000; /* All dialogs are on top */
+    z-index: 10000;
 
-    opacity: 0; /* All dialogs start hidden for animation */
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* Animation for all dialogs */
-    pointer-events: none; /* Not clickable when hidden or animating */
+    opacity: 0;
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; /* General dialog animation */
+    pointer-events: none;
 
-    display: flex; /* All dialogs are flex containers */
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-dialog.show {
+dialog.show { /* Used to show the dialog and trigger opening animation */
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1); /* Zooms in */
-    pointer-events: all; /* Make dialog clickable when shown */
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: all;
 }
 
-dialog.hide {
+dialog.hide { /* Used to hide the dialog and trigger closing animation */
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.85); /* Shrinks slightly before closing */
-    pointer-events: none; /* Prevent clicks during hide animation */
+    transform: translate(-50%, -50%) scale(0.85);
+    pointer-events: none;
 }
 
-/* --- CUSTOM BACKDROP STYLING --- */
-/* This targets your <div id="backdrop"> element, which both dialogs will share.
-   It should NOT affect the native dialog::backdrop. */
-#backdrop { /* Assuming you have this custom backdrop in your HTML */
+#backdrop {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Dim background */
-    backdrop-filter: blur(0); /* No blur on the backdrop itself */
-    z-index: 9999; /* Below dialogs, above content */
-    opacity: 0; /* Start hidden for animation */
-    pointer-events: none; /* Not clickable when hidden */
-    transition: opacity 0.3s ease-out; /* Fade animation for backdrop */
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(0);
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-out;
 }
 
 #backdrop.show {
-    opacity: 1; /* Make backdrop visible when it has 'show' class */
-    pointer-events: all; /* Make backdrop clickable when visible */
+    opacity: 1;
+    pointer-events: all;
 }
 
-/* Ensure the native dialog::backdrop is explicitly transparent/hidden
-   if you are using a custom #backdrop div. */
+#backdrop.hidden {
+    display: none;
+    opacity: 0;
+    pointer-events: none;
+}
+
 dialog::backdrop {
     background-color: transparent;
     backdrop-filter: none;
     opacity: 0;
     pointer-events: none;
-    /* transition: none; - Add this if you want to ensure no transition */
 }
 
+/* --- DOWNLOAD DIALOG SPECIFIC STYLES --- */
+/* These styles should *only* define visual appearance, not animation states. */
+/* The animation states are managed by the general 'dialog.show' and 'dialog.hide' classes. */
 .download-dialog {
     width: 320px;
-    /* These properties are moved here to specifically target ONLY the download dialog */
     border-radius: 20px;
     text-align: center;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(15px);
     background-color: rgba(255, 255, 255, 0.6);
     color: var(--text-color-light);
+    /* REMOVED: opacity, transform, transition from here */
 }
 
-/* Dark Mode for ONLY the download dialog */
 body.dark .download-dialog {
     background-color: rgba(10, 10, 10, 0.7);
     color: var(--text-color-dark);
