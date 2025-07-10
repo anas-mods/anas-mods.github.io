@@ -28,7 +28,6 @@
     --button-background-dark: #8ab4f8;
     --button-text-dark: #1a1a1a;
     --footer-text-dark: #aaa;
-    --transition: 0.25s ease-in-out;
 }
 
 * {
@@ -204,12 +203,31 @@ body.dark .main-header.no-translucency {
 }
 
 .main-header.shrink h1 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
 }
 
 header h1 {
     margin: 0;
     font-size: 1.8em;
+}
+
+.main-page-title-wrapper {
+    display: flex;         
+    align-items: center;   
+    gap: 12px;             
+
+}
+
+.image-title {
+    height: 40px;
+    width: auto;
+    border-radius: 50px;
+}
+
+.main-page-title-wrapper h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    white-space: nowrap;
 }
 
 .header-icons {
@@ -226,42 +244,6 @@ md-icon-button {
 body.dark md-icon-button {
     --md-sys-color-on-surface: var(--text-color-dark); 
     --md-sys-color-on-surface-variant: var(--text-color-dark);
-}
-
-.content-header {
-    width: 80%; 
-    max-width: 1200px;
-    margin: 90px auto 10px auto; 
-    padding: 0 15px; 
-    text-align: left;
-}
-
-.content-header .title-wrapper {
-    margin-bottom: 2px; 
-}
-
-.content-header .content-title {
-    font-size: 1.5em; 
-    margin: 0; 
-    color: var(--text-color-light);
-}
-
-.content-header .subtitle-wrapper {
-
-}
-
-.content-header .content-subtitle {
-    font-size: 1em; 
-    color: var(--footer-text-light); 
-    margin: 0; 
-}
-
-body.dark .content-header .content-title {
-    color: var(--text-color-dark);
-}
-
-body.dark .content-header .content-subtitle {
-    color: var(--footer-text-dark);
 }
 
 .cards-container {
@@ -331,35 +313,32 @@ body.dark .content-header .content-subtitle {
 }
 
 .coming-soon-scan {
-    /* Set the initial text color to something visible */
-    color: #FFD700; /* Gold, for example */
 
-    /* Create a gradient that will move */
+    color: #FFD700; 
+
     background: linear-gradient(
         90deg,
-        #FFD700 0%,         /* Initial gold */
-        #FFA500 20%,         /* Orange */
-        #FFD700 40%,         /* Back to gold */
-        #FFA500 60%,         /* Orange */
-        #FFD700 80%,         /* Back to gold */
-        #FFA500 100%         /* Orange */
+        #FFD700 0%,         
+        #FFA500 20%,         
+        #FFD700 40%,         
+        #FFA500 60%,         
+        #FFD700 80%,         
+        #FFA500 100%         
     );
-    background-size: 200% 100%; /* Make the gradient wider than the text */
+    background-size: 200% 100%; 
 
-    /* Apply the gradient as text color */
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
-    /* Animation */
     animation: text-scan-animation 3s infinite linear;
 }
 
 @keyframes text-scan-animation {
     0% {
-        background-position: 0% 0; /* Start of the gradient */
+        background-position: 0% 0; 
     }
     100% {
-        background-position: -200% 0; /* End of the gradient (moves left) */
+        background-position: -200% 0; 
     }
 }
 
@@ -767,3 +746,26 @@ body.dark .download-dialog {
 
 .card-container {
  }
+ 
+ #toast-notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-size: 0.9em;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 10001;
+    white-space: nowrap;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#toast-notification.show {
+    opacity: 1;
+    visibility: visible;
+}

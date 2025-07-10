@@ -55,15 +55,21 @@
 <body>
     <header class="main-header translucent">
     <div class="header-inner">
-            <h1>Anas Modz</h1>
+        <div class="title-container image-title-container hidden">
+            <img src="assets/images/Anas-Modz.jpeg" alt="Title" class="image-title" />
         </div>
-        <div class="header-icons">
-    <md-icon-button id="settings-button" aria-label="Settings">
-        <md-icon>settings</md-icon>
-    </md-icon-button>
-</div>
-    </header>
+        <div class="title-container text-title-container">
+            <h1 class="text-title">Anas Mods</h1>
+        </div>
+    </div>
+    <div class="header-icons">
+        <md-icon-button id="settings-button" aria-label="Settings">
+            <md-icon>settings</md-icon>
+        </md-icon-button>
+    </div>
+</header>
 
+<div id="toast-notification"></div>
     <div class="content-header">
         <div class="title-wrapper">
             <h2 class="content-title">Mod Menus</h2>
@@ -128,7 +134,7 @@
       <footer>
       <div class="container">
           <hr class="custom-divider">
-          <span>&copy; <span id="current-year"></span> 2025 Gabe Mods. All rights reserved</span>
+          <span>&copy; <span id="current-year"></span> Gabe Mods. All rights reserved</span>
       </div>
   </footer>
   <dialog id="settings-modal" class="settings-dialog">
