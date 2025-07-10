@@ -330,6 +330,39 @@ body.dark .content-header .content-subtitle {
     color: inherit;
 }
 
+.coming-soon-scan {
+    /* Set the initial text color to something visible */
+    color: #FFD700; /* Gold, for example */
+
+    /* Create a gradient that will move */
+    background: linear-gradient(
+        90deg,
+        #FFD700 0%,         /* Initial gold */
+        #FFA500 20%,         /* Orange */
+        #FFD700 40%,         /* Back to gold */
+        #FFA500 60%,         /* Orange */
+        #FFD700 80%,         /* Back to gold */
+        #FFA500 100%         /* Orange */
+    );
+    background-size: 200% 100%; /* Make the gradient wider than the text */
+
+    /* Apply the gradient as text color */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation */
+    animation: text-scan-animation 3s infinite linear;
+}
+
+@keyframes text-scan-animation {
+    0% {
+        background-position: 0% 0; /* Start of the gradient */
+    }
+    100% {
+        background-position: -200% 0; /* End of the gradient (moves left) */
+    }
+}
+
 .telegram-button-container {
     text-align: center;
     padding: 2rem 5%;
