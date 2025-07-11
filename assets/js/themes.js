@@ -5,7 +5,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme-select');
   const metaColor = document.querySelector('meta[name="theme-color"]');
   const translucencyToggle = document.getElementById('translucency-toggle');
-  const translucentElements = document.querySelectorAll('.translucent, .main-header');
+  const translucentElements = document.querySelectorAll('.translucent, .main-header'); // Includes .main-header for consistency
+
+  // Get the download dialog element
+  const downloadModal = document.getElementById('download-modal');
   
   const chooseBackgroundButton = document.getElementById('choose-background-button');
   const clearBackgroundButton = document.getElementById('clear-background-button');
@@ -57,12 +60,33 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.toggle('translucent', isTranslucent);
       el.classList.toggle('no-translucency', !isTranslucent);
     });
+
+    // Apply translucency to the download dialog based on this setting
+    applyDownloadDialogTranslucency(isTranslucent, isHardReset);
     
     if (isHardReset) {
       localStorage.removeItem('translucency');
     } else {
       localStorage.setItem('translucency', isTranslucent ? 'on' : 'off');
     }
+  }
+
+  // NEW FUNCTION: Control translucency of the download dialog
+  function applyDownloadDialogTranslucency(isTranslucent, isHardReset = false) {
+      if (downloadModal) {
+          downloadModal.classList.toggle('opaque', !isTranslucent); // Add 'opaque' if not translucent
+          // The translucent styles are default, so if isTranslucent is true, 'opaque' is removed
+      }
+
+      // Store separate setting for download dialog if needed,
+      // but typically it follows the main translucency setting.
+      // For this request, we'll make it follow the main translucency.
+      // If you want separate control, add a new setting in HTML and localStorage.
+      if (isHardReset) {
+          localStorage.removeItem('download-dialog-opaque'); // Clear this specific setting on reset
+      } else {
+          localStorage.setItem('download-dialog-opaque', !isTranslucent ? 'on' : 'off');
+      }
   }
   
   function applyBackgroundImage(imageUrlOrDataUrl, isHardReset = false) {
@@ -97,6 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   
+  // --- Initial Load ---
+
   const storedTheme = localStorage.getItem('preferred-theme');
   if (storedTheme) {
     themeSelect.value = storedTheme;
@@ -110,10 +136,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedTranslucency = localStorage.getItem('translucency');
   if (savedTranslucency === 'off') {
     translucencyToggle.checked = false;
-    applyTranslucency(false);
+    applyTranslucency(false); // Apply to headers AND download dialog
   } else {
     translucencyToggle.checked = true;
-    applyTranslucency(true);
+    applyTranslucency(true); // Apply to headers AND download dialog
+  }
+
+  // Ensure download dialog translucency is applied on load
+  const savedDownloadDialogOpaque = localStorage.getItem('download-dialog-opaque');
+  if (savedDownloadDialogOpaque === 'on') {
+      // This means the main translucency was OFF, so we explicitly apply opaque
+      applyDownloadDialogTranslucency(false); 
+  } else {
+      // This means main translucency was ON, or no specific setting for dialog,
+      // so it will be translucent by default unless main setting overrides.
+      // Re-apply based on the main translucency setting to be safe.
+      applyDownloadDialogTranslucency(translucencyToggle.checked);
   }
   
   const savedBackgroundImage = localStorage.getItem('background-image');
@@ -123,6 +161,8 @@ document.addEventListener('DOMContentLoaded', () => {
     applyBackgroundImage('');
   }
   
+  // --- Event Listeners ---
+
   themeSelect.addEventListener('change', () => {
     const choice = themeSelect.value;
     updateTheme(choice);
@@ -135,7 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (chooseBackgroundButton) {
     chooseBackgroundButton.addEventListener('click', () => {
-      
       imageUploadInput.click();
     });
   }
@@ -147,14 +186,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const reader = new FileReader();
         reader.onload = (e) => {
           applyBackgroundImage(e.target.result);
-          
           localStorage.setItem('background-image-name', file.name);
           currentBackgroundStatus.textContent = file.name;
         };
         reader.readAsDataURL(file);
       }
-      
-      event.target.value = '';
+      event.target.value = ''; // Clear the input so same file can be selected again
     });
   }
   
@@ -175,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
       updateTheme(theme, hardReset);
       
       translucencyToggle.checked = translucency;
-      applyTranslucency(translucency, hardReset);
+      applyTranslucency(translucency, hardReset); // This will now also reset download dialog translucency
       
       applyBackgroundImage(backgroundImage, hardReset);
       

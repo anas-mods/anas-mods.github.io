@@ -28,6 +28,9 @@
     --button-background-dark: #8ab4f8;
     --button-text-dark: #1a1a1a;
     --footer-text-dark: #aaa;
+    --transition: 0.2s ease;
+    --opaque-dialog-bg-light: #ffffff;
+    --opaque-dialog-bg-dark: #1e1e1e;
 }
 
 * {
@@ -195,15 +198,14 @@ body.dark .main-header.no-translucency {
 }
 
 .main-header h1 {
-    font-size: 1.3rem;
+    font-size: 1.3rem; /* Kept original size */
     font-weight: 550;
     margin: 0;
-    transition: font-size var(--transition);
-    will-change: font-size, transform;
+    /* Removed transition and will-change to prevent size changes */
 }
 
 .main-header.shrink h1 {
-    font-size: 1.25rem;
+    font-size: 1.3rem; /* Kept original size */
 }
 
 header h1 {
@@ -246,13 +248,50 @@ body.dark md-icon-button {
     --md-sys-color-on-surface-variant: var(--text-color-dark);
 }
 
+.content-header {
+    width: 80%;
+    max-width: 1200px;
+    margin: 90px auto 15px; /* Adjusted margin-top and margin-bottom */
+    padding: 0;
+    /* Removed text-align, align-items, justify-content to allow left alignment */
+}
+
+.title-wrapper {
+    margin-bottom: 3px; /* Reduced space between title and subtitle */
+}
+
+.subtitle-wrapper {
+    margin-top: 0;
+}
+
+.content-header .content-title {
+    font-size: 2em; /* Kept original size */
+    margin: 0; /* Ensures no extra margin pushes it right */
+    line-height: 1.1;
+    color: var(--text-color-light);
+    text-align: left; /* Explicitly left-align */
+}
+
+.content-header .content-subtitle {
+    font-size: 1.1em; /* Kept original size */
+    margin: 0; /* Ensures no extra margin pushes it right */
+    line-height: 1.1;
+    color: var(--text-color-light);
+    text-align: left; /* Explicitly left-align */
+}
+
+body.dark .content-header .content-title,
+body.dark .content-header .content-subtitle {
+    color: var(--text-color-dark);
+}
+
 .cards-container {
     display: flex;
     flex-direction: column;
     width: 80%; 
     gap: 20px;
     max-width: 1200px;
-    margin: 0 auto; 
+    margin: px auto; 
     padding: 0 0 2rem 0; 
 }
 
@@ -344,7 +383,7 @@ body.dark md-icon-button {
 
 .telegram-button-container {
     text-align: center;
-    padding: 2rem 5%;
+    padding: 5px 5%;
 }
 
 .telegram-button {
@@ -397,7 +436,7 @@ body.dark footer {
     .content-header {
         width: 90%;
         padding: 0 10px;
-        margin-top: 80px;
+        margin: 80px auto 10px; /* Adjusted margin for mobile */
     }
 
     .cards-container {
@@ -406,11 +445,11 @@ body.dark footer {
     }
 
     .content-header .content-title {
-        font-size: 1.3em; 
+        font-size: 1.3em; /* Kept original size */
     }
 
     .content-header .content-subtitle {
-        font-size: 0.95em; 
+        font-size: 0.95em; /* Kept original size */
     }
 
     header {
@@ -450,7 +489,7 @@ body.dark footer {
     .content-header {
         width: 95%;
         padding: 0 8px;
-        margin-top: 75px;
+        margin: 75px auto 5px; /* Adjusted margin for mobile */
     }
 
     .cards-container {
@@ -459,12 +498,12 @@ body.dark footer {
     }
 
     .content-header .content-title {
-        font-size: 1.1rem;
+        font-size: 1.1rem; /* Kept original size */
         font-weight: 500;
     }
 
     .content-header .content-subtitle {
-        font-size: 0.9em; 
+        font-size: 0.9em; /* Kept original size */
     }
 
     .card-container {
@@ -642,6 +681,15 @@ dialog::backdrop {
 body.dark .download-dialog {
     background-color: rgba(10, 10, 10, 0.5);
     color: var(--text-color-dark);
+}
+
+.download-dialog.opaque {
+    backdrop-filter: none; /* Remove blur */
+    background-color: var(--opaque-dialog-bg-light); /* Solid background for light theme */
+}
+
+body.dark .download-dialog.opaque {
+    background-color: var(--opaque-dialog-bg-dark); /* Solid background for dark theme */
 }
 
 .download-dialog .modal-content {
