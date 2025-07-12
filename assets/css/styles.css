@@ -408,18 +408,18 @@ body.dark.custom-background .card-container.card-transparent {
     }
 }
 
-@keyframes pulseGlow {
+@keyframes shimmerFade {
   0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(0, 123, 255, 0.0);
+    opacity: 0;
+    transform: scale(1) translateY(0);
   }
   50% {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.4);
+    opacity: 0.6;
+    transform: scale(1.05) translateY(-2px);
   }
   100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 rgba(0, 123, 255, 0.0);
+    opacity: 0;
+    transform: scale(1) translateY(0);
   }
 }
 
@@ -429,30 +429,50 @@ body.dark.custom-background .card-container.card-transparent {
 }
 
 .telegram-button {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--button-background-light);
-  color: var(--button-text-light);
+  background-color: #229ED9;
+  color: white;
   padding: 0.8rem 1.5rem;
   border-radius: 8px;
   text-decoration: none;
   font-weight: bold;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   gap: 8px;
-  animation: pulseGlow 2.5s ease-in-out infinite;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.telegram-button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #27e2a4, #229ED9, #27e2a4);
+  filter: blur(10px);
+  z-index: -1;
+  opacity: 0;
+  animation: shimmerFade 4s ease-in-out infinite;
+  transition: opacity 0.3s ease;
 }
 
 .telegram-button:hover {
-  background-color: #0056b3;
-  transform: translateY(-2px) scale(1.05);
+  transform: translateY(-2px);
+  background-color: #1c8ec5;
 }
 
 .telegram-icon {
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   vertical-align: middle;
+  transition: transform 0.3s ease;
+}
+
+.telegram-button:hover .telegram-icon {
+  transform: scale(1.1);
 }
 
 footer {
