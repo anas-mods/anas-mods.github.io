@@ -94,13 +94,13 @@ if (resetButton) {
         theme: 'system',
         font: 'system',
         translucency: true,
+        cardTransparency: false, // Default for new toggle on reset
         backgroundImage: '',
-        hardReset: true
+        hardReset: true // Ensure hardReset is true by default
       }
     });
     
     settingsModal.dispatchEvent(resetEvent);
-    console.log("Reset button clicked, custom event 'resetSettings' dispatched.");
   });
 } else {
   console.warn("resetButton element not found in material-dialog.js. Reset functionality will not work.");

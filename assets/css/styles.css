@@ -137,6 +137,7 @@ body.dark footer {
 
 body.dark .main-header {
     background: var(--header-bg-dark);
+    border-bottom: none;
 }
 
 .main-header.scrolled {
@@ -152,6 +153,7 @@ body.dark .main-header {
 
 body.dark .main-header.translucent.scrolled {
     background-color: rgba(0, 0, 0, 0.5);
+    border-bottom: none;
 }
 
 .main-header.no-translucency {
@@ -163,6 +165,7 @@ body.dark .main-header.translucent.scrolled {
 
 body.dark .main-header.no-translucency {
     background-color: #121212 !important;
+    border-bottom: none;
 }
 
 .main-header.shrink {
@@ -310,6 +313,15 @@ body.dark .content-header .content-subtitle {
     box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.5);
     overflow: hidden;
     transition: var(--transition);
+}
+
+body.custom-background .card-container.card-transparent {
+    background-color: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+body.dark.custom-background .card-container.card-transparent {
+    background-color: rgba(30, 30, 30, 0.7);
 }
 
 .card-container:active {

@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const themeSelect = document.getElementById('theme-select');
   const metaColor = document.querySelector('meta[name="theme-color"]');
   const translucencyToggle = document.getElementById('translucency-toggle');
-  const translucentElements = document.querySelectorAll('.translucent, .main-header'); // Includes .main-header for consistency
+  const cardTransparencyToggle = document.getElementById('card-transparency-toggle'); // New toggle
+  const translucentElements = document.querySelectorAll('.translucent, .main-header');
 
-  // Get the download dialog element
   const downloadModal = document.getElementById('download-modal');
   
   const chooseBackgroundButton = document.getElementById('choose-background-button');
@@ -61,7 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
       el.classList.toggle('no-translucency', !isTranslucent);
     });
 
-    // Apply translucency to the download dialog based on this setting
     applyDownloadDialogTranslucency(isTranslucent, isHardReset);
     
     if (isHardReset) {
@@ -71,22 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // NEW FUNCTION: Control translucency of the download dialog
   function applyDownloadDialogTranslucency(isTranslucent, isHardReset = false) {
       if (downloadModal) {
-          downloadModal.classList.toggle('opaque', !isTranslucent); // Add 'opaque' if not translucent
-          // The translucent styles are default, so if isTranslucent is true, 'opaque' is removed
+          downloadModal.classList.toggle('opaque', !isTranslucent);
       }
 
-      // Store separate setting for download dialog if needed,
-      // but typically it follows the main translucency setting.
-      // For this request, we'll make it follow the main translucency.
-      // If you want separate control, add a new setting in HTML and localStorage.
       if (isHardReset) {
-          localStorage.removeItem('download-dialog-opaque'); // Clear this specific setting on reset
+          localStorage.removeItem('download-dialog-opaque');
       } else {
           localStorage.setItem('download-dialog-opaque', !isTranslucent ? 'on' : 'off');
       }
+  }
+
+  function applyCardTransparency(isTransparent, isHardReset = false) {
+    const cards = document.querySelectorAll('.card-container'); // Changed to .card-container
+    cards.forEach(card => {
+      card.classList.toggle('card-transparent', isTransparent);
+    });
+
+    if (isHardReset) {
+      localStorage.removeItem('card-transparency');
+    } else {
+      localStorage.setItem('card-transparency', isTransparent ? 'on' : 'off');
+    }
   }
   
   function applyBackgroundImage(imageUrlOrDataUrl, isHardReset = false) {
@@ -136,21 +142,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const savedTranslucency = localStorage.getItem('translucency');
   if (savedTranslucency === 'off') {
     translucencyToggle.checked = false;
-    applyTranslucency(false); // Apply to headers AND download dialog
+    applyTranslucency(false);
   } else {
     translucencyToggle.checked = true;
-    applyTranslucency(true); // Apply to headers AND download dialog
+    applyTranslucency(true);
   }
 
-  // Ensure download dialog translucency is applied on load
+  const savedCardTransparency = localStorage.getItem('card-transparency');
+  if (savedCardTransparency === 'on') {
+    cardTransparencyToggle.checked = true;
+    applyCardTransparency(true);
+  } else {
+    cardTransparencyToggle.checked = false;
+    applyCardTransparency(false);
+  }
+
   const savedDownloadDialogOpaque = localStorage.getItem('download-dialog-opaque');
   if (savedDownloadDialogOpaque === 'on') {
-      // This means the main translucency was OFF, so we explicitly apply opaque
       applyDownloadDialogTranslucency(false); 
   } else {
-      // This means main translucency was ON, or no specific setting for dialog,
-      // so it will be translucent by default unless main setting overrides.
-      // Re-apply based on the main translucency setting to be safe.
       applyDownloadDialogTranslucency(translucencyToggle.checked);
   }
   
@@ -172,6 +182,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const enabled = translucencyToggle.checked;
     applyTranslucency(enabled);
   });
+
+  cardTransparencyToggle.addEventListener('change', () => {
+    const enabled = cardTransparencyToggle.checked;
+    applyCardTransparency(enabled);
+  });
   
   if (chooseBackgroundButton) {
     chooseBackgroundButton.addEventListener('click', () => {
@@ -191,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         reader.readAsDataURL(file);
       }
-      event.target.value = ''; // Clear the input so same file can be selected again
+      event.target.value = '';
     });
   }
   
@@ -206,14 +221,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const settingsModal = document.getElementById('settings-modal');
   if (settingsModal) {
     settingsModal.addEventListener('resetSettings', (event) => {
-      const { theme, font, translucency, backgroundImage, hardReset } = event.detail;
+      const { theme, font, translucency, cardTransparency, backgroundImage, hardReset } = event.detail;
       
       themeSelect.value = theme;
       updateTheme(theme, hardReset);
       
       translucencyToggle.checked = translucency;
-      applyTranslucency(translucency, hardReset); // This will now also reset download dialog translucency
+      applyTranslucency(translucency, hardReset);
       
+      cardTransparencyToggle.checked = cardTransparency;
+      applyCardTransparency(cardTransparency, hardReset);
+
       applyBackgroundImage(backgroundImage, hardReset);
       
       if (hardReset) {
