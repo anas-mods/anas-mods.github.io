@@ -124,30 +124,30 @@ body.dark .settings-dialog select:focus {
 .settings-dialog .modal-content h2 {
   margin-top: 0;
   margin-bottom: 16px;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 1.5rem;
 }
 
 .settings-dialog label[for="theme-select"] {
   font-size: 1.1rem;
-  font-weight: 510;
+  font-weight: 450;
   display: block;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 
 .settings-dialog label[for="font-select"] {
   font-size: 1.1rem;
-  font-weight: 510;
+  font-weight: 450;
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 .settings-dialog label[for="background-select"] {
   font-size: 1.1rem;
-  font-weight: 510;
+  font-weight: 450;
   display: block;
   margin-top: 15px;
-  margin-bottom: 2px;
+  margin-bottom: 0px;
 }
 
 .modal-actions {
