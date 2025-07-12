@@ -156,6 +156,18 @@ body.dark .main-header.translucent.scrolled {
     border-bottom: none;
 }
 
+body.custom-background .main-header.translucent:not(.scrolled) {
+    background-color: rgba(255, 255, 255, 0.0);
+    border-bottom: none;
+}
+
+body.dark.custom-background .main-header.translucent:not(.scrolled) {
+    background-color: rgba(0, 0, 0, 0.0);
+    border-bottom: none;
+    box-shadow: none;
+}
+
+
 .main-header.no-translucency {
     background-color: var(--solid-bg);
     backdrop-filter: none;
@@ -172,6 +184,7 @@ body.dark .main-header.no-translucency {
     padding: 6px 16px;
     height: var(--header-scrolled-height);
 }
+
 
 .header-inner {
     display: flex;
