@@ -1,3 +1,5 @@
+<!-- 2025 Gabe Mods (https://gabemods.github.io/about), All Rights Reserved. -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -156,14 +158,28 @@
               </div>
           </div>
           <div class="setting-row">
-              <div class="toggle-setting">
-                  <span class="setting-label">Card Transparency</span>
-                  <label class="switch">
-                      <input type="checkbox" id="card-transparency-toggle">
-                      <span class="slider"></span>
-                  </label>
-              </div>
-          </div>
+    <div class="toggle-setting">
+        <span class="setting-label">Card Transparency</span>
+        <button id="info-card-transparency" class="info-button" aria-label="More information about card transparency">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 0 24 24" width="24px" fill="#000000">
+                <path d="M0 0h24v24H0V0z" fill="none"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+        </button>
+        <label class="switch">
+            <input type="checkbox" id="card-transparency-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+
+<div id="info-dialog" class="material-dialog" style="display: none;">
+    <div class="material-dialog-content">
+        <p>When enabled, cards will be partially transparent with blur if a background image is applied.</p>
+        <button id="close-info-dialog" class="material-dialog-close-button">Got it!</button>
+    </div>
+</div>
+
           <div class="setting-row">
               <label for="font-select">Font</label>
               <select id="font-select">
@@ -215,5 +231,5 @@
   <script type="module" src="assets/js/themes.js"></script>
   <script type="module" src="assets/js/header.js"></script>
   <script type="module" src="assets/js/fonts.js"></script>
-  <script type="module" src="assets/js/downloads.js"></script> </body>
+  <script type="module" src="assets/js/download-dialog.js"></script> </body>
 </html>
