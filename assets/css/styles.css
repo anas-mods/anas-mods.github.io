@@ -281,7 +281,7 @@ body.dark md-icon-button {
 }
 
 .content-header .content-title {
-    font-size: 2em; 
+    font-size: 1.1em; 
     margin: 0; 
     line-height: 1.1;
     color: var(--text-color-light);
@@ -289,7 +289,7 @@ body.dark md-icon-button {
 }
 
 .content-header .content-subtitle {
-    font-size: 1.1em; 
+    font-size: 0.9em; 
     margin: 0; 
     line-height: 1.1;
     color: var(--text-color-light);
@@ -534,7 +534,7 @@ body.dark footer {
     }
 
     .content-header .content-title {
-        font-size: 1.3em; 
+        font-size: 1.1em; 
     }
 
     .content-header .content-subtitle {
