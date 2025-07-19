@@ -1,11 +1,11 @@
-/* 2025 Gabe Mods (https://gabemods.github.io/about), All Rights Reserved. 
+/* 2025 Gabe Mods (https://gabemods.github.io/about), All Rights Reserved.
 */
 
 :root {
     --solid-bg: #fff;
     --background-color-light: #f4f4f4;
     --text-color-light: #333;
-    --card-container-background-color-light: #fff; 
+    --card-container-background-color-light: #fff;
     --header-bg-light: rgba(250, 250, 250, 0.2);
     --header-bg-dark: rgba(18, 18, 18, 0.3);
     --link-color-light: #007bff;
@@ -22,9 +22,9 @@
 
     --background-color-dark: #1a1a1a;
     --text-color-dark: #e0e0e0;
-    --card-container-background-color-dark: #202121; 
+    --card-container-background-color-dark: #202121;
     --header-background-dark: #333;
-    --link-color-dark: #8ab4f8; 
+    --link-color-dark: #8ab4f8;
     --button-background-dark: #8ab4f8;
     --button-text-dark: #1a1a1a;
     --footer-text-dark: #aaa;
@@ -57,6 +57,8 @@ body {
     line-height: 1.6;
     background-color: var(--background-color-light);
     color: var(--text-color-light);
+
+    overflow-x: hidden;
 }
 
 body.font-OneUISans {
@@ -85,20 +87,20 @@ body.dark header {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-body.dark .card-container { 
-    background-color: var(--card-container-background-color-dark); 
+body.dark .card-container {
+    background-color: var(--card-container-background-color-dark);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-body.dark .card-container:hover { 
+body.dark .card-container:hover {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
 }
 
-body.dark .card-container a { 
+body.dark .card-container a {
     color: var(--text-color-dark);
 }
 
-body.dark .developer-name { 
+body.dark .developer-name {
     color: var(--link-color-dark);
 }
 
@@ -109,7 +111,7 @@ body.dark .telegram-button {
 }
 
 body.dark .telegram-button:hover {
-    background-color: #6a9ee8; 
+    background-color: #6a9ee8;
 }
 
 body.dark footer {
@@ -215,14 +217,14 @@ body.dark .main-header.no-translucency {
 }
 
 .main-header h1 {
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
     font-weight: 550;
     margin: 0;
 
 }
 
 .main-header.shrink h1 {
-    font-size: 1.3rem; 
+    font-size: 1.3rem;
 }
 
 header h1 {
@@ -231,9 +233,9 @@ header h1 {
 }
 
 .main-page-title-wrapper {
-    display: flex;         
-    align-items: center;   
-    gap: 12px;             
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
 }
 
@@ -256,12 +258,12 @@ header h1 {
 }
 
 md-icon-button {
-    --md-sys-color-on-surface: var(--text-color-light); 
-    --md-sys-color-on-surface-variant: var(--text-color-light); 
+    --md-sys-color-on-surface: var(--text-color-light);
+    --md-sys-color-on-surface-variant: var(--text-color-light);
 }
 
 body.dark md-icon-button {
-    --md-sys-color-on-surface: var(--text-color-dark); 
+    --md-sys-color-on-surface: var(--text-color-dark);
     --md-sys-color-on-surface-variant: var(--text-color-dark);
 }
 
@@ -273,7 +275,7 @@ body.dark md-icon-button {
 }
 
 .title-wrapper {
-    margin-bottom: 3px; 
+    margin-bottom: 3px;
 }
 
 .subtitle-wrapper {
@@ -281,19 +283,23 @@ body.dark md-icon-button {
 }
 
 .content-header .content-title {
-    font-size: 1.1em; 
-    margin: 0; 
+
+    font-size: clamp(1.8em, 3.5vw, 2.8em);
+    margin: 0;
     line-height: 1.1;
     color: var(--text-color-light);
     text-align: left;
+    word-break: break-word; 
 }
 
 .content-header .content-subtitle {
-    font-size: 0.9em; 
-    margin: 0; 
+
+    font-size: clamp(1em, 1.8vw, 1.2em);
+    margin: 0;
     line-height: 1.1;
     color: var(--text-color-light);
-    text-align: left; 
+    text-align: left;
+    word-break: break-word; 
 }
 
 body.dark .content-header .content-title,
@@ -303,24 +309,26 @@ body.dark .content-header .content-subtitle {
 
 .cards-container {
     display: flex;
-    flex-direction: column; 
-    width: 80%; 
+    flex-direction: column;
+    width: 80%;
     gap: 10px;
     max-width: 1200px;
-    margin: auto; 
-    padding: 0 0 2rem 0; 
+    margin: auto;
+    padding: 0 0 2rem 0;
 }
 
 .card-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; 
     align-items: center;
     justify-content: center;
-    padding: 15px;
+
+    padding: clamp(15px, 2.5vw, 20px);
     width: 100%;
     background-color: var(--card-container-background-color-light);
     border-radius: 20px;
-    gap: 10px;
+
+    gap: clamp(10px, 2vw, 15px);
     box-shadow: 0px 0px 0px rgba(255, 255, 255, 0.5);
     overflow: hidden;
     transition: var(--transition);
@@ -349,9 +357,11 @@ body.dark.custom-background .card-container.card-transparent {
 }
 
 .card-container img {
-    width: 70px;
-    height: 70px;
-    border-radius: 20px;
+
+    width: clamp(60px, 12vw, 80px);
+    height: clamp(60px, 12vw, 80px);
+
+    border-radius: clamp(15px, 2.5vw, 20px);
     object-fit: cover;
     flex-shrink: 0;
 }
@@ -361,48 +371,55 @@ body.dark.custom-background .card-container.card-transparent {
     flex-direction: column;
     gap: 3px;
     flex-grow: 1;
+    min-width: 0; 
 }
 
 .card-container .developer-name {
     font-weight: bold;
-    font-size: 1.2em;
+
+    font-size: clamp(1.1em, 2.2vw, 1.3em);
     color: var(--link-color-light);
     margin: 0;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .card-container p {
-    font-size: 0.9em;
+
+    font-size: clamp(0.85em, 1.6vw, 1em);
     margin: 0;
     color: inherit;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .coming-soon-scan {
-
-    color: #FFD700; 
-
+    color: #FFD700;
     background: linear-gradient(
         90deg,
-        #FFD700 0%,         
-        #FFA500 20%,         
-        #FFD700 40%,         
-        #FFA500 60%,         
-        #FFD700 80%,         
-        #FFA500 100%         
+        #FFD700 0%,
+        #FFA500 20%,
+        #FFD700 40%,
+        #FFA500 60%,
+        #FFD700 80%,
+        #FFA500 100%
     );
-    background-size: 200% 100%; 
-
+    background-size: 200% 100%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
     animation: text-scan-animation 3s infinite linear;
 }
 
 @keyframes text-scan-animation {
     0% {
-        background-position: 0% 0; 
+        background-position: 0% 0;
     }
     100% {
-        background-position: -200% 0; 
+        background-position: -200% 0;
     }
 }
 
@@ -442,6 +459,10 @@ body.dark.custom-background .card-container.card-transparent {
   gap: 8px;
   overflow: hidden;
   z-index: 0;
+  max-width: 90%; 
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden; 
 }
 
 .telegram-button::before {
@@ -479,7 +500,7 @@ footer {
     margin-top: 2rem;
     font-size: 0.9em;
     color: var(--footer-text-light);
-    display: flex; 
+    display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -490,130 +511,25 @@ footer {
 }
 
 body.dark footer {
-  color: var(--text-color-dark); 
+  color: var(--text-color-dark);
 }
 
-@media (min-width: 769px) {
-    .cards-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 0 0 2rem 0;
-    }
-
-    .card-container {
-        flex-direction: row;
-        width: auto;
-    }
-
-    .content-header {
-        width: 80%; 
-        margin: 90px auto 15px; 
-        max-width: 1200px; 
-    }
-
-    .content-header .content-title {
-        font-size: 2em; 
-    }
-
-    .content-header .content-subtitle {
-        font-size: 1.1em; 
-    }
+footer .container {
+  width: min(90%, 800px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 
-@media (max-width: 768px) {
-    .content-header {
-        width: 90%;
-        padding: 0 10px;
-        margin: 80px auto 10px; 
-    }
-
-    .cards-container {
-        width: 90%;
-        padding: 0 0 1.5rem 0;
-    }
-
-    .content-header .content-title {
-        font-size: 1.1em; 
-    }
-
-    .content-header .content-subtitle {
-        font-size: 0.95em; 
-    }
-
-    header {
-        padding: 0.8rem 4%;
-    }
-
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    .card-container {
-        padding: 12px;
-        gap: 15px;
-    }
-
-    .card-container img {
-        width: 60px;
-        height: 60px;
-        border-radius: 15px;
-    }
-
-    .card-container .developer-name {
-        font-size: 1.1em;
-    }
-
-    .card-container p {
-        font-size: 0.85em;
-    }
-
-    .telegram-button {
-        width: 90%;
-        box-sizing: border-box; 
-    }
+footer a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color var(--transition);
 }
 
-@media (max-width: 480px) {
-    .content-header {
-        width: 95%;
-        padding: 0 8px;
-        margin: 75px auto 10px; 
-    }
-
-    .cards-container {
-        width: 95%;
-        padding: 0 0 1rem 0;
-    }
-
-    .content-header .content-title {
-        font-size: 1.1rem; 
-        font-weight: 500;
-    }
-
-    .content-header .content-subtitle {
-        font-size: 0.9em; 
-    }
-
-    .card-container {
-        padding: 10px;
-        gap: 10px;
-        border-radius: 15px;
-    }
-
-    .card-container img {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-    }
-
-    .card-container .developer-name {
-        font-size: 1em;
-    }
-
-    .card-container p {
-        font-size: 0.8em;
-    }
+footer a:hover {
+  text-decoration: underline;
 }
 
 #content-fade-overlay {
@@ -652,42 +568,7 @@ body.dark .custom-divider {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  background-color: transparent;
-  margin-top: 40px;
-  padding: 10px 0;
-  text-align: center;
-  font-size: clamp(0.85rem, 1vw + 0.3rem, 0.95rem);
-  transition: color var(--transition);
-}
-
-footer .container {
-  width: min(90%, 800px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-footer a {
-  color: var(--accent);
-  text-decoration: none;
-  transition: color var(--transition);
-}
-
-footer a:hover {
-  text-decoration: underline;
-}
-
-.card-container {
- }
-
- #toast-notification {
+#toast-notification {
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -708,4 +589,177 @@ footer a:hover {
 #toast-notification.show {
     opacity: 1;
     visibility: visible;
+}
+
+@media (min-width: 769px) {
+    .cards-container {
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        padding: 0 0 2rem 0;
+    }
+
+    .card-container {
+        flex-direction: row; 
+        width: auto;
+    }
+
+    .content-header {
+        width: 80%;
+        margin: 90px auto 15px;
+        max-width: 1200px;
+    }
+
+    .content-header .content-title {
+        font-size: 2em;
+    }
+
+    .content-header .content-subtitle {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-header {
+        width: 90%;
+        padding: 0 10px;
+        margin: 80px auto 10px;
+    }
+
+    .cards-container {
+        width: 90%;
+        padding: 0 0 1.5rem 0;
+
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    header {
+        padding: 0.8rem 4%;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .card-container {
+        padding: 12px;
+        gap: 15px;
+    }
+
+    .card-container img {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+    }
+
+    .card-container .developer-name {
+        font-size: 1.1em;
+    }
+
+    .card-container p {
+        font-size: 0.85em;
+    }
+
+    .telegram-button {
+        width: 90%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-header {
+        width: 95%;
+        padding: 0 8px;
+        margin: 75px auto 10px;
+    }
+
+    .cards-container {
+        width: 95%;
+        padding: 0 0 1rem 0;
+        grid-template-columns: 1fr; 
+    }
+
+    .content-header .content-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .content-header .content-subtitle {
+        font-size: 0.9em;
+    }
+
+    .card-container {
+        padding: 10px;
+        gap: 10px;
+        border-radius: 15px;
+        flex-direction: row; 
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card-container img {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        margin-bottom: 0; 
+    }
+
+    .card-container .developer-name,
+    .card-container p {
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left; 
+    }
+
+    .card-container .developer-name {
+        font-size: 1em;
+    }
+
+    .card-container p {
+        font-size: 0.8em;
+    }
+}
+
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .content-header .content-title {
+        font-size: 1.3rem;
+        line-height: 1.2;
+    }
+    
+    .content-header .content-subtitle {
+        font-size: 0.9rem;
+        line-height: 1.2;
+    }
+    
+    .card-container {
+        padding: 10px;
+        gap: 10px;
+        flex-direction: row;
+    }
+    
+    .card-container img {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+    }
+    
+    .card-container .developer-name {
+        font-size: 0.95rem;
+    }
+    
+    .card-container p {
+        font-size: 0.75rem;
+    }
+    
+    .telegram-button {
+        font-size: 0.85rem;
+        padding: 0.6rem 1.2rem;
+    }
+    
+    .telegram-icon {
+        width: 22px;
+        height: 22px;
+    }
 }
