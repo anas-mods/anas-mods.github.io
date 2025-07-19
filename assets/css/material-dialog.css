@@ -525,12 +525,12 @@ dialog.hide {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4); /* Darker backdrop for consistency with settings */
+  background-color: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(0);
-  z-index: 9999;
+  z-index: 99;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 250ms ease; /* Keep ease for backdrop, or match cubic-bezier */
+  transition: opacity 250ms ease;
 }
 
 #backdrop.show {
@@ -562,26 +562,26 @@ dialog::backdrop {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.9); /* Initial hidden scale, same as settings dialog */
+  transform: translate(-50%, -50%) translateY(-20px) scale(0.9);
   margin: 0;
   overflow: hidden;
   max-height: 90vh;
   box-sizing: border-box;
-  opacity: 0; /* Starts hidden */
-  pointer-events: none; /* Not interactive when hidden */
-  /* This transition will apply to both 'open' and 'closing' classes */
+  opacity: 0;
+  pointer-events: none;
   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
 }
 
-.download-dialog.open { /* Renamed from .show for consistency with settings-dialog */
+.download-dialog.open {
   opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translate(-50%, -50%) translateY(0) scale(1);
   pointer-events: auto;
 }
 
 .download-dialog.closing {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0.9); /* Closes back to the initial hidden state scale */
+  transform: translate(-50%, -50%) translateY(-20px) scale(0.9);
   pointer-events: none;
 }
 
