@@ -3,6 +3,7 @@
 
 :root {
   --md-icon-font: Material Symbols Rounded;
+  --transition: 0.2s ease;
 }
 
 @keyframes scaleIn {
@@ -39,7 +40,6 @@
   background-color: white;
   color: black;
   font-family: 'Roboto', sans-serif;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   z-index: 999;
   opacity: 0;
   transform: translateY(-20px) scale(0.9);
@@ -415,13 +415,12 @@ body.dark .background-status {
 }
 
 .material-dialog {
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.8);
     opacity: 0;
     pointer-events: none;
-
     background-color: #FFFBFE;
     padding: 24px;
     border-radius: 28px;
@@ -432,7 +431,6 @@ body.dark .background-status {
     width: calc(100% - 48px);
     text-align: left;
     z-index: 1000;
-
     transition: opacity 0.3s ease-out, transform 0.3s ease-out;
 }
 
@@ -495,18 +493,13 @@ dialog {
   border: none;
   padding: 0;
   margin: auto;
-
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.9);
-
   z-index: 10000;
-
   opacity: 0;
-  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
   pointer-events: none;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -516,6 +509,7 @@ dialog {
 dialog.show {
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   pointer-events: all;
 }
 
@@ -531,17 +525,17 @@ dialog.hide {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4); /* Darker backdrop for consistency with settings */
   backdrop-filter: blur(0);
   z-index: 9999;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.3s ease-out;
+  transition: opacity 250ms ease; /* Keep ease for backdrop, or match cubic-bezier */
 }
 
 #backdrop.show {
   opacity: 1;
-  pointer-events: all;
+  pointer-events: auto;
 }
 
 #backdrop.hidden {
@@ -557,16 +551,38 @@ dialog::backdrop {
   pointer-events: none;
 }
 
-/* Download dialog */
 .download-dialog {
   width: 320px;
   border-radius: 20px;
   text-align: center;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(15px);
   background-color: rgba(255, 255, 255, 0.5);
   color: var(--text-color-light);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9); /* Initial hidden scale, same as settings dialog */
+  margin: 0;
+  overflow: hidden;
+  max-height: 90vh;
+  box-sizing: border-box;
+  opacity: 0; /* Starts hidden */
+  pointer-events: none; /* Not interactive when hidden */
+  /* This transition will apply to both 'open' and 'closing' classes */
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
 
+.download-dialog.open { /* Renamed from .show for consistency with settings-dialog */
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+.download-dialog.closing {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.9); /* Closes back to the initial hidden state scale */
+  pointer-events: none;
 }
 
 body.dark .download-dialog {
@@ -592,6 +608,7 @@ body.dark .download-dialog.opaque {
   width: 100%;
   padding: 15px;
   box-sizing: border-box;
+  overflow-y: auto;
 }
 
 .download-dialog h2 {
@@ -628,7 +645,7 @@ body.dark .download-dialog.opaque {
   color: white;
   background: linear-gradient(90deg, #007AFF, #0051CC);
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.1s ease;
+  transition: var(--transition);
   box-shadow: none;
   min-height: auto;
   text-transform: none;
@@ -637,7 +654,10 @@ body.dark .download-dialog.opaque {
 
 .download-dialog .download-button.direct:hover {
   background: linear-gradient(90deg, #006AE6, #0043B3);
-  transform: none;
+}
+
+.download-dialog .download-button.direct:active {
+  transform: scale(1.05);
 }
 
 .download-dialog .download-button.telegram {
@@ -651,7 +671,7 @@ body.dark .download-dialog.opaque {
   color: white;
   background: linear-gradient(90deg, #0088cc, #0077b3);
   text-decoration: none;
-  transition: background 0.3s ease, transform 0.1s ease;
+  transition: var(--transition);
   box-shadow: none;
   min-height: auto;
   text-transform: none;
@@ -660,25 +680,32 @@ body.dark .download-dialog.opaque {
 
 .download-dialog .download-button.telegram:hover {
   background: linear-gradient(90deg, #007AB3, #006699);
-  transform: none;
   text-decoration: none;
 }
 
+.download-dialog .download-button.telegram:active {
+  transform: scale(1.05);
+}
+
 .download-dialog .close-button {
-  background: none;
+  background-color: transparent;
+  color: #00609B;
   border: none;
-  color: #FF3B30;
-  font-size: 16px;
-  font-weight: bold;
+  border-radius: 20px;
   padding: 8px;
   cursor: pointer;
   align-self: flex-end;
-  margin-top: 5px;
-  transition: text-decoration 0.2s ease, color 0.2s ease;
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: capitalize;
+  transition: var(--transition);
 }
 
 .download-dialog .close-button:hover {
-  text-decoration: underline;
-  background: none;
-  color: #CC0000;
+  background-color: #E0E7F8;
+  transform: scale(1.05);
+}
+
+.download-dialog .close-button:active {
+  transform: scale(0.95);
 }

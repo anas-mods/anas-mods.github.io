@@ -493,17 +493,31 @@ body.dark footer {
   color: var(--text-color-dark); 
 }
 
-@media (min-width: 769px) { 
+@media (min-width: 769px) {
     .cards-container {
         display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 20px; 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
         padding: 0 0 2rem 0;
     }
 
     .card-container {
-        flex-direction: row; 
-        width: auto; 
+        flex-direction: row;
+        width: auto;
+    }
+
+    .content-header {
+        width: 80%; 
+        margin: 90px auto 15px; 
+        max-width: 1200px; 
+    }
+
+    .content-header .content-title {
+        font-size: 2em; 
+    }
+
+    .content-header .content-subtitle {
+        font-size: 1.1em; 
     }
 }
 
