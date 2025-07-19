@@ -19,7 +19,6 @@
     --md-sys-typescale-headline-font: "OneUISans", sans-serif;
     --header-initial-height: 60px;
     --header-scrolled-height: 65px;
-
     --background-color-dark: #1a1a1a;
     --text-color-dark: #e0e0e0;
     --card-container-background-color-dark: #202121;
@@ -756,8 +755,8 @@ body.dark .custom-divider {
     }
 
     .telegram-button {
-        padding: 1rem 1.8rem;
-        font-size: 1rem;
+        padding: 1rem 1.5rem;
+        font-size: 0.9rem;
         font-weight: 600;
     }
 
