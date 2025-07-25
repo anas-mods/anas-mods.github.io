@@ -105,7 +105,7 @@ body.dark .developer-name {
 
 body.dark .telegram-button {
     background-color: var(--button-background-dark);
-    color: var(--button-text-dark);
+    color: var(--button-text-light);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
